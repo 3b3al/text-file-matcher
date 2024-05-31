@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    # network_mode: host
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # - ./text-file-matcher/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build:
+      context: ./text-file-matcher
+      dockerfile: Dockerfile
+    container_name: spring-boot-app
+    # network_mode: host
+    ports:
+      - "8090:90"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test?currentSchema=tfms&useSSL=false
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_SECRET_KEY: d5642639b856eeab6f7a1f096c2f38bbb3b9cbd75d9a46577fe87e6fa3fceb6d
+      JWT_EXPIRATION_TIME: 3600000
+    volumes:
+      - files_sys:/app
+      # Add other necessary environment variables for your Spring Boot application
+
+volumes:
+  postgres_data:
+  files_sys:
+

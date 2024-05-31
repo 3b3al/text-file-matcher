@@ -22,13 +22,17 @@ Docker
 To use this application:
 Sign Up
 Login To generate Token(That u use on any request)
+
 Configure the paths of File A and the directory containing the pool of text files in the properties file.
+
 Execute the Spring Boot application.
+
 Review the generated scores to identify the text file that best matches File A.
-Contribution
-Contributions to this project are welcome. If you encounter any issues or have suggestions for enhancements, please feel free to submit a pull request or raise an issue on the GitHub repository.
+
+
 
 **Notes:
 -You will find needed environment variables on docker-compose file to use them on your yml
+
 -You can use docker compose to run the project 
 

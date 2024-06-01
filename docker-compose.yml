@@ -33,10 +33,10 @@ services:
       JWT_SECRET_KEY: d5642639b856eeab6f7a1f096c2f38bbb3b9cbd75d9a46577fe87e6fa3fceb6d
       JWT_EXPIRATION_TIME: 3600000
     volumes:
-      - files_sys:/app
+      - ./uploads:/app/uploads
       # Add other necessary environment variables for your Spring Boot application
 
 volumes:
   postgres_data:
-  files_sys:
+  uploads:
 
